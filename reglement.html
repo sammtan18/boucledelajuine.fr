@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Règlement — Les Boucles de la Juine</title>
+  <style>
+    :root{
+      --pink:#e91e79;--pink-dark:#c91869;--pink-soft:#fff0f7;--text:#2b2b2b;--muted:#6d6d6d;--line:#f3cade;--white:#fff;--shadow:0 18px 48px rgba(233,30,121,.12);--shadow-soft:0 8px 24px rgba(233,30,121,.08)
+    }
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--text);background:radial-gradient(circle at top left,rgba(233,30,121,.08),transparent 34%),linear-gradient(180deg,#fff 0%,#fff7fb 100%)}a{text-decoration:none;color:inherit}.wrap{max-width:1120px;margin:0 auto;padding:0 20px}img{max-width:100%;display:block}
+    header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom:1px solid #f6dbe7}.nav{display:flex;align-items:center;justify-content:center;padding:1px 0;gap:32px;flex-wrap:wrap}.brand{display:flex;align-items:center;justify-content:center;gap:14px}.brand img{width:110px;height:auto;filter:drop-shadow(0 6px 12px rgba(233,30,121,.12))}.brand-title{font-size:17px;font-weight:800;line-height:1.05}.brand-title span{color:var(--pink)}nav ul{display:flex;list-style:none;gap:26px;padding:0;margin:0;font-weight:700;color:#444;justify-content:center;align-items:center}nav a{position:relative}nav a:after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:2px;background:var(--pink);transition:.25s}nav a:hover:after{width:100%}.cta{background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;padding:14px 24px;border-radius:16px;font-weight:800;box-shadow:var(--shadow);transition:.2s}.cta:hover{transform:translateY(-1px)}
+    .hero{padding:36px 0 20px}.hero-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:34px;background:#fff;box-shadow:var(--shadow);padding:44px 42px;display:grid;grid-template-columns:1fr 260px;gap:32px;align-items:center}.hero-card:after{content:"";position:absolute;right:-90px;top:-120px;width:360px;height:360px;background:radial-gradient(circle,rgba(233,30,121,.16),transparent 65%);z-index:0}.hero-card>*{position:relative;z-index:1}.eyebrow{color:var(--pink);font-weight:800;letter-spacing:.08em;font-size:13px;text-transform:uppercase}.hero h1{font-size:58px;line-height:.95;margin:16px 0 16px;font-weight:900;color:var(--pink)}.hero p{font-size:18px;max-width:680px;color:var(--muted);line-height:1.55}.logo-panel{background:#fff;border:1px solid var(--line);border-radius:28px;padding:20px;box-shadow:var(--shadow-soft)}
+    .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:22px 0 10px}.summary-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow-soft)}.summary-card strong{display:block;color:var(--pink);font-size:22px}.summary-card span{font-weight:700;color:#444}.content{padding:22px 0 54px}.rules{display:grid;gap:18px}.rule{background:#fff;border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--shadow-soft)}.rule h2{margin:0 0 12px;color:var(--pink);font-size:22px}.rule p,.rule li{color:var(--muted);line-height:1.6}.rule ul{margin:10px 0 0;padding-left:20px}.notice{background:linear-gradient(135deg,#fde7f1,#fff);border-color:#efb7cf}.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:#fff7fb;color:var(--pink-dark);font-weight:800;margin:4px 6px 4px 0}.back{display:inline-flex;margin:26px 0 0}.footer{padding:22px 0 42px;color:#777;text-align:center}
+    @media(max-width:900px){nav ul{display:none}.hero-card{grid-template-columns:1fr}.hero h1{font-size:42px}.summary{grid-template-columns:repeat(2,1fr)}.two-cols{grid-template-columns:1fr}}@media(max-width:560px){.summary{grid-template-columns:1fr}.hero-card{padding:28px 22px}.brand img{width:58px}}
+ 
+
+ </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+  <img src="assets/logo.png" alt="Les Boucles de la Juine" class="logo-only">
+</div>
+    <nav>
+      <ul>
+        <li><a href="#courses">Les courses</a></li>
+        <li><a href="#marches">Marches</a></li>
+        <li><a href="#solidarite">Projet solidaire</a></li>
+        <li><a href="benevoles.html">Bénévoles</a></li>
+        <li><a href="#partenaires">Partenaires</a></li>
+        <li><a href="reglement.html">Règlement</a></li>
+		<li><a href="histoire.html">Histoire</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="#inscription">Je m'inscris</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-card">
+      <div>
+        <div class="eyebrow">Règlement officiel 2026</div>
+        <h1>Règlement des courses</h1>
+        <p>Les Boucles de la Juine — courses et marches organisées à Saclas, dans le Sud Essonne, le dimanche 27 septembre 2026.</p>
+        <a class="cta back" href="index.html">Retour au site</a>
+      </div>
+      <div class="logo-panel"><img src="assets/logo.png" alt="Logo Les Boucles de la Juine"></div>
+    </div>
+  </section>
+
+  <section class="summary">
+    <div class="summary-card"><strong>3</strong><span>courses : 6 km, 9 km, 15 km</span></div>
+    <div class="summary-card"><strong>2</strong><span>marches : 6 km et 12 km</span></div>
+    <div class="summary-card"><strong>27/09</strong><span>édition 2026</span></div>
+    <div class="summary-card"><strong>Saclas</strong><span>Sud Essonne</span></div>
+  </section>
+
+  <section class="content rules">
+    <article class="rule notice">
+      <h2>1. Organisation</h2>
+      <p>L’association <strong>Organisation de Manifestations Sportives — Les Boucles de la Juine</strong>, affiliée à l’UFOLEP et en collaboration avec Handisport, organise une manifestation sportive pédestre sur route comprenant trois courses et deux marches. L’événement est interdit aux engins à moteur, sauf véhicules de l’organisation ou acceptés par celle-ci, ainsi qu’aux animaux.</p>
+    </article>
+
+    <article class="rule">
+      <h2>2. Lieu, date et épreuves</h2>
+      <p>La manifestation se déroule à <strong>Saclas (91), Sud Essonne</strong>, le <strong>dimanche 27 septembre 2026</strong>.</p>
+      <div class="two-cols">
+        <ul>
+          <li><strong>15 km</strong> : départ à 9h00 — parcours sur route, traversant notamment Méréville — dénivelé +151 m — GPX #21870390.</li>
+          <li><strong>9 km</strong> : départ à 9h15 — dénivelé +86 m — GPX #21806152.</li>
+          <li><strong>6 km</strong> : départ à 9h30 — dénivelé +50 m — GPX #21806119.</li>
+        </ul>
+        <ul>
+          <li><strong>Marche 12 km</strong> : départ à 8h45, passage par Guillerval.</li>
+          <li><strong>Marche 6 km</strong> : départ à 8h45, passage par Guillerval.</li>
+          <li>Les horaires peuvent être ajustés par l’organisation si les conditions l’exigent.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="rule">
+      <h2>3. Conditions de participation</h2>
+      <p>Les courses sont ouvertes aux coureurs licenciés et non licenciés, dans le respect des catégories d’âge autorisées et des règles UFOLEP/FFA applicables. Les participants mineurs doivent fournir une autorisation parentale et les justificatifs demandés par la réglementation en vigueur.</p>
+      <p>Les participants majeurs doivent être en mesure de présenter une licence acceptée ou une attestation de Parcours de Prévention Santé (PPS) valide, ou tout document équivalent exigé par la réglementation applicable au jour de l’épreuve.</p>
+    </article>
+
+    <article class="rule">
+      <h2>4. Inscriptions, dossards et repas</h2>
+      <p>L’inscription est personnelle. Aucun transfert de dossard n’est autorisé sans accord préalable de l’organisation. Le dossard fourni doit être porté visiblement pendant toute l’épreuve.</p>
+      <p>Un <strong>repas d’après-course à 16 €</strong> est proposé. Les coureurs peuvent le réserver lors de leur inscription aux courses. Les non-coureurs pourront également réserver via le lien prévu sur le site.</p>
+    </article>
+
+    <article class="rule">
+      <h2>5. Projet solidaire</h2>
+      <p>Les bénéfices des inscriptions, avec le soutien des sponsors et partenaires, contribueront à l’achat d’une <strong>joëlette</strong>, dont le coût estimé est compris entre <strong>3 000 € et 4 000 €</strong>, afin de favoriser l’inclusion et permettre à davantage de personnes de partager l’aventure.</p>
+    </article>
+
+    <article class="rule">
+      <h2>6. Sécurité, secours et comportement</h2>
+      <p>La sécurité est assurée par l’organisation, les signaleurs et les services de secours présents sur l’événement. Les participants doivent respecter les consignes des bénévoles, des signaleurs et des officiels. La course se déroulant sur des voies ouvertes ou partiellement ouvertes à la circulation, chacun doit rester vigilant et respecter le balisage.</p>
+    </article>
+
+    <article class="rule">
+      <h2>7. Ravitaillements, classement et récompenses</h2>
+      <p>Des postes de ravitaillement sont prévus sur les parcours ainsi qu’à l’arrivée. Des classements pourront être établis pour chacune des courses, au scratch et par catégories, selon les modalités définies par l’organisation. Chaque arrivant pourra recevoir un lot ou une récompense selon les disponibilités.</p>
+    </article>
+
+    <article class="rule">
+      <h2>8. Assurances et responsabilité</h2>
+      <p>La responsabilité civile de l’organisateur est couverte dans le cadre de l’assurance souscrite pour la manifestation. Il est conseillé à chaque participant non licencié de vérifier qu’il dispose d’une assurance personnelle couvrant les dommages corporels liés à la pratique sportive.</p>
+    </article>
+
+    <article class="rule">
+      <h2>9. Droit à l’image et données personnelles</h2>
+      <p>En participant à l’événement, chaque participant autorise l’organisation, ses ayants droit et ses partenaires à utiliser les images prises lors de la manifestation pour la communication de l’événement, sauf opposition écrite préalable. Les résultats pourront être publiés sur les supports de l’organisation et du chronométreur.</p>
+    </article>
+
+    <article class="rule">
+      <h2>10. Force majeure et annulation</h2>
+      <p>L’organisation se réserve le droit de modifier, neutraliser ou annuler tout ou partie de la manifestation en cas de force majeure, de décision administrative, de conditions météorologiques défavorables ou pour toute raison liée à la sécurité. Les participants devront se conformer strictement aux consignes données.</p>
+    </article>
+
+    <article class="rule notice">
+      <h2>11. Acceptation du règlement</h2>
+      <p>L’inscription à l’une des épreuves implique l’acceptation pleine et entière du présent règlement.</p>
+      <div><span class="pill">Les Boucles de la Juine</span><span class="pill">Saclas — Sud Essonne</span><span class="pill">27 septembre 2026</span></div>
+    </article>
+  </section>
+</main>
+<footer class="footer wrap">Les Boucles de la Juine · Saclas · Sud Essonne</footer>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscription bénévoles — Les Boucles de la Juine</title>
+  <style>
+    :root{
+      --pink:#e91e79;
+      --pink-dark:#c91869;
+      --pink-soft:#fff0f7;
+      --text:#2b2b2b;
+      --muted:#6d6d6d;
+      --line:#f3cade;
+      --white:#fff;
+      --shadow:0 18px 48px rgba(233,30,121,.12);
+      --shadow-soft:0 8px 24px rgba(233,30,121,.08);
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(233,30,121,.10), transparent 34%),
+        linear-gradient(180deg,#ffffff 0%, #fff7fb 100%);
+    }
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 20px 54px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px}
+    .brand{display:flex;align-items:center;gap:14px;font-weight:900;font-size:18px;line-height:1.05}
+    .brand img{width:110px;height:auto;filter:drop-shadow(0 6px 12px rgba(233,30,121,.12))}
+    .brand span{color:var(--pink)}
+    .back{display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--pink);color:var(--pink);border-radius:16px;padding:12px 18px;font-weight:800;background:#fff}
+    .hero{background:#fff;border:1px solid var(--line);border-radius:32px;padding:36px;box-shadow:var(--shadow);overflow:hidden;position:relative}
+    .hero:before{content:"";position:absolute;right:-120px;top:-120px;width:320px;height:320px;border-radius:999px;background:rgba(233,30,121,.10)}
+    .eyebrow{color:var(--pink);font-weight:900;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+    h1{font-size:48px;line-height:.96;margin:14px 0 14px;color:var(--pink);font-weight:900;max-width:760px}
+    p{color:var(--muted);line-height:1.6;margin:0}
+    .intro{max-width:760px;font-size:17px}
+    form{margin-top:26px;display:grid;gap:18px}
+    .form-card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:var(--shadow-soft)}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    label{display:block;font-weight:800;margin-bottom:8px;color:#333}
+    input[type="text"],input[type="date"],input[type="tel"]{
+      width:100%;border:1px solid #f1c2d8;border-radius:16px;padding:14px 14px;font-size:16px;background:#fff;color:var(--text);outline:none;
+      transition:border-color .2s ease, box-shadow .2s ease
+    }
+    input:focus{border-color:var(--pink);box-shadow:0 0 0 4px rgba(233,30,121,.10)}
+    .radio-row,.check-row{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+    .choice{display:flex;align-items:center;gap:10px;border:1px solid #f1c2d8;background:#fff7fb;border-radius:16px;padding:12px 14px;font-weight:700;color:#444}
+    .choice input{accent-color:var(--pink);width:18px;height:18px}
+    .full{grid-column:1/-1}
+    .note{font-size:14px;color:#777;margin-top:8px}
+    .actions{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:4px}
+    .submit{
+      border:0;cursor:pointer;background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;padding:15px 28px;border-radius:16px;
+      font-size:16px;font-weight:900;box-shadow:var(--shadow);transition:transform .2s ease, box-shadow .2s ease
+    }
+    .submit:hover{transform:translateY(-1px);box-shadow:0 22px 52px rgba(233,30,121,.18)}
+    .required{color:var(--pink)}
+    footer{text-align:center;color:#8a6a78;font-size:13px;margin-top:20px}
+    @media (max-width:720px){
+      header{align-items:flex-start;flex-direction:column}
+      h1{font-size:38px}
+      .hero{padding:26px 20px;border-radius:26px}
+      .grid{grid-template-columns:1fr}
+      .back{width:100%}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html" aria-label="Retour à l'accueil Les Boucles de la Juine">
+        <img src="assets/logo.png" alt="Logo Les Boucles de la Juine" />
+      </a>
+      <a class="back" href="index.html">Retour au site</a>
+    </header>
+
+    <main class="hero">
+      <div class="eyebrow">Inscription bénévoles</div>
+      <h1>Rejoindre l'équipe bénévoles</h1>
+      <p class="intro">
+        Merci de proposer ton aide pour Les Boucles de la Juine. Les bénévoles sont indispensables : sans eux, la course n’existerait pas.
+        Ce formulaire nous permettra d’organiser les missions, notamment l’accueil, les dossards, les ravitaillements et les postes de signaleurs.
+      </p>
+
+      <form action="https://formsubmit.co/antoine91.vincent@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="Nouvelle inscription bénévole — Les Boucles de la Juine" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+
+        <section class="form-card">
+          <div class="grid">
+            <div>
+              <label for="nom">Nom <span class="required">*</span></label>
+              <input id="nom" name="Nom" type="text" required autocomplete="family-name" />
+            </div>
+            <div>
+              <label for="prenom">Prénom <span class="required">*</span></label>
+              <input id="prenom" name="Prénom" type="text" required autocomplete="given-name" />
+            </div>
+            <div>
+              <label for="date-naissance">Date de naissance <span class="required">*</span></label>
+              <input id="date-naissance" name="Date de naissance" type="date" required />
+            </div>
+            <div>
+              <label for="telephone">Téléphone portable <span class="required">*</span></label>
+              <input id="telephone" name="Téléphone portable" type="tel" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00" />
+            </div>
+
+            <div class="full">
+              <label>Possédez-vous le permis de conduire ? <span class="required">*</span></label>
+              <div class="radio-row" role="radiogroup" aria-label="Permis de conduire">
+                <label class="choice"><input type="radio" name="Permis de conduire" value="Oui" required /> Oui</label>
+                <label class="choice"><input type="radio" name="Permis de conduire" value="Non" required /> Non</label>
+              </div>
+            </div>
+
+            <div class="full">
+              <label>Disponibilités <span class="required">*</span></label>
+              <div class="check-row">
+                <label class="choice">
+                  <input type="checkbox" name="Disponible le 27 septembre 2026" value="Oui" required />
+                  Je confirme être disponible la journée du 27 septembre 2026.
+                </label>
+              </div>
+            </div>
+
+            <div class="full">
+              <label>Repas d’après-course</label>
+              <div class="check-row">
+                <label class="choice">
+                  <input type="checkbox" name="Reste au repas d'après-course" value="Oui" />
+                  Je souhaite rester au repas d’après-course, pris en charge pour le bénévole uniquement.
+                </label>
+              </div>
+              <p class="note">Le repas est offert uniquement au bénévole inscrit.</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <button class="submit" type="submit">Envoyer mon inscription</button>
+        </div>
+      </form>
+    </main>
+
+    <footer>
+      Les informations saisies seront envoyées à l’organisation des Boucles de la Juine.
+    </footer>
+  </div>
+</body>
+</html>

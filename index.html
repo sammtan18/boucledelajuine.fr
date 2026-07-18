@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Les Boucles de la Juine</title>
+  <style>
+    :root{
+      --pink:#e91e79;
+      --pink-dark:#c91869;
+      --pink-soft:#fff0f7;
+      --pink-soft-2:#fde0ee;
+      --text:#2b2b2b;
+      --muted:#6d6d6d;
+      --line:#f3cade;
+      --white:#ffffff;
+      --shadow:0 18px 48px rgba(233,30,121,.12);
+      --shadow-soft:0 8px 24px rgba(233,30,121,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(233,30,121,.08), transparent 34%),
+        linear-gradient(180deg,#ffffff 0%, #fff7fb 100%);
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+    header{
+      position:sticky;top:0;z-index:40;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(14px);
+      border-bottom:1px solid #f6dbe7;
+    }
+    .nav{display:flex;align-items:center;justify-content:center;padding:1px 0;gap:30px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;justify-content:center;gap:14px;flex-shrink:0}
+.brand{display:flex;align-items:center;justify-content:center;gap:14px;flex-shrink:0}
+	.brand img{width:110px;height:auto;filter:drop-shadow(0 6px 12px rgba(233,30,121,.12))}
+    nav ul{display:flex;list-style:none;gap:26px;padding:0;margin:0;font-weight:700;color:#444}
+    nav a{position:relative}
+    nav a:after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:2px;background:var(--pink);transition:.25s}
+    nav a:hover:after{width:100%}
+    .cta{
+      background:linear-gradient(135deg,var(--pink),#ff4d9b);
+      color:#fff;padding:14px 24px;border-radius:16px;
+      font-weight:800;box-shadow:var(--shadow);transition:transform .2s ease, box-shadow .2s ease
+    }
+    .cta:hover{transform:translateY(-1px);box-shadow:0 22px 52px rgba(233,30,121,.18)}
+    .hero{padding:28px 0 18px}
+    .hero-card{
+      display:grid;grid-template-columns:1fr 1.42fr;overflow:hidden;
+      border:1px solid var(--line);border-radius:34px;background:#fff;box-shadow:var(--shadow)
+    }
+    .hero-copy{
+      position:relative;z-index:2;padding:46px 38px;
+      background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,.97) 62%,rgba(255,255,255,.65) 82%,rgba(255,255,255,0) 100%);
+    }
+    .eyebrow{color:var(--pink);font-weight:800;letter-spacing:.08em;font-size:13px;text-transform:uppercase}
+    h1{font-size:66px;line-height:.92;margin:16px 0 18px;font-weight:900;color:var(--pink)}
+    .meta{display:grid;gap:12px;margin:22px 0;font-size:18px;font-weight:700}
+    .meta div{display:flex;align-items:center;gap:10px}
+    .meta-icon,.inline-icon,.feature img,.mini-icon{object-fit:contain;display:block}
+    .meta-icon{width:22px;height:22px;flex:0 0 22px}
+    .inline-icon{width:20px;height:20px;flex:0 0 20px}
+    .buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+    .btn{padding:14px 24px;border-radius:16px;font-weight:800;border:2px solid var(--pink);transition:.2s ease}
+    .btn.primary{background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;box-shadow:var(--shadow-soft)}
+    .btn.secondary{background:#fff;color:var(--pink)}
+    .btn:hover{transform:translateY(-1px)}
+    .hero-media{position:relative;min-height:560px;overflow:hidden;background:#ddd}
+    .hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.03);filter:saturate(1.04) contrast(1.02)}
+    .hero-media:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.82) 0%,rgba(255,255,255,.45) 16%,rgba(255,255,255,0) 34%),linear-gradient(180deg,rgba(255,255,255,0) 55%,rgba(255,240,247,.45) 100%);z-index:1}
+
+    .hero-project-card{
+      position:absolute;
+      left:315px;
+      right:-315px;
+      bottom:20px;
+      z-index:4;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:16px 18px;
+      border-radius:22px;
+      background:rgba(255,255,255,.92);
+      border:1px solid rgba(243,202,222,.95);
+      box-shadow:0 18px 45px rgba(0,0,0,.12), 0 10px 30px rgba(233,30,121,.12);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+    }
+    .hero-project-card img{
+      width:15px;
+      height:15px;
+      flex:0 0 46px;
+      object-fit:contain;
+      filter:drop-shadow(0 8px 12px rgba(233,30,121,.18));
+    }
+    .hero-project-card strong{
+      display:block;
+      color:var(--pink);
+      font-size:16px;
+      line-height:1.15;
+      text-transform:uppercase;
+      letter-spacing:.02em;
+    }
+    .hero-project-card p{
+      margin-top:3px;
+      font-size:13px;
+      line-height:1.35;
+      color:#4f4f4f;
+    }
+    .hero-project-card a{
+      margin-left:auto;
+      flex:0 0 auto;
+      padding:10px 14px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--pink),#ff4d9b);
+      color:#fff;
+      font-weight:800;
+      font-size:13px;
+      box-shadow:0 10px 22px rgba(233,30,121,.18);
+    }
+    .section{padding:22px 0}
+    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .grid-3{display:grid;grid-template-columns:1fr 1.1fr 1fr;gap:18px;align-items:stretch}
+    .card{background:#fff;border:1px solid var(--line);border-radius:26px;overflow:hidden;box-shadow:var(--shadow-soft);transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;display:flex;flex-direction:column;height:100%}
+    .card:hover{transform:translateY(-4px);box-shadow:var(--shadow);border-color:#efb7cf}
+    .card img.cover{width:100%;height:240px;object-fit:cover}
+    .img-wrap{position:relative;overflow:hidden}
+    .img-wrap img{transition:transform .45s ease, filter .45s ease;filter:saturate(1.04)}
+    .card:hover .img-wrap img{transform:scale(1.05)}
+    .img-wrap:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0) 45%,rgba(255,255,255,.72) 100%),linear-gradient(0deg,rgba(255,255,255,0) 70%,rgba(255,255,255,.1) 100%);pointer-events:none}
+    .tag{position:absolute;top:14px;left:14px;z-index:2;background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;border-radius:12px;padding:8px 12px;font-size:14px;font-weight:800;box-shadow:0 10px 20px rgba(233,30,121,.18)}
+    .course-meta{display:grid;gap:8px;padding:14px 16px;border-top:1px solid #f5d9e6;border-bottom:1px solid #f5d9e6;background:#fff7fb;font-weight:700}
+    .course-meta-line{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+    .card-body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+    h3{margin:10px 0 8px;font-size:18px;color:var(--pink);text-transform:uppercase}
+    p{margin:0;color:var(--muted);line-height:1.55}
+    .feature-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:8px 0 24px}
+    .feature{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(180deg,#fff 0%,#fff8fb 100%);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:var(--shadow-soft)}
+    .feature img{width:28px;height:28px;flex:0 0 28px;margin-top:2px}
+    .wide-card{padding:24px;background:linear-gradient(180deg,#fff,#fff4f8)}
+    .solidarity-card{display:flex;flex-direction:column;justify-content:center;text-align:center;min-height:auto}
+    .solidarity-visual{position:relative;display:flex;justify-content:center;align-items:center;margin:10px 0 14px;min-height:240px}
+    .solidarity-visual:before{content:"";position:absolute;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle, rgba(233,30,121,.14), rgba(233,30,121,0) 68%);z-index:0}
+    .solidarity-visual img{position:relative;z-index:1;max-width:400px;width:100%;filter:drop-shadow(0 20px 30px rgba(233,30,121,.10));-webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 86%, rgba(0,0,0,.45) 94%, rgba(0,0,0,0));mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 86%, rgba(0,0,0,.45) 94%, rgba(0,0,0,0))}
+    .card-action{display:flex;justify-content:center;align-items:center;margin-top:auto;padding-top:8px}
+    .small-btn{padding:12px 20px;border-radius:14px;font-weight:800;border:2px solid var(--pink);background:#fff;color:var(--pink);display:inline-flex;align-items:center;justify-content:center;transition:.2s ease}
+    .small-btn:hover{background:var(--pink);color:#fff;transform:translateY(-1px)}
+    .countdown{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+    .time-box{min-width:72px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:10px 10px 8px;text-align:center;box-shadow:var(--shadow-soft)}
+    .time-box strong{display:block;font-size:24px;color:var(--pink);line-height:1}
+    .time-box span{font-size:11px;font-weight:800;text-transform:uppercase;color:var(--muted);letter-spacing:.06em}
+    .join{display:grid;grid-template-columns:1.15fr auto auto;align-items:center;gap:24px;background:linear-gradient(135deg,#fde7f1 0%,#fff7fb 100%);border:1px solid var(--line);border-radius:26px;padding:22px 24px;margin-top:20px;box-shadow:var(--shadow-soft)}
+    .join-copy{display:flex;flex-direction:column;gap:8px}
+    .join strong{font-size:18px;color:var(--pink)}
+    .join-note{font-weight:700;color:var(--pink-dark)}
+    .join .cta[aria-disabled="true"]{opacity:.7;pointer-events:none}
+    .partners{margin:26px 0 50px;background:#fff;border:1px solid var(--line);border-radius:26px;padding:22px;box-shadow:var(--shadow-soft)}
+    .partners h2{font-size:18px;color:var(--pink);text-align:center;margin:0 0 18px;text-transform:uppercase}
+    .partner-row{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;align-items:center}
+    .partner{background:linear-gradient(180deg,#fff 0%,#fff9fc 100%);border:1px solid #f5e5ed;border-radius:18px;padding:14px;display:flex;align-items:center;justify-content:center;min-height:120px;box-shadow:0 6px 18px rgba(233,30,121,.04)}
+    .partner img{max-height:90px;max-width:100%;object-fit:contain}
+    .partner-carousel{overflow:hidden;position:relative;width:100%;height:120px}
+    .partner-carousel:before,.partner-carousel:after{content:"";position:absolute;top:0;width:70px;height:100%;z-index:3;pointer-events:none}
+    .partner-carousel:before{left:0;background:linear-gradient(to right,#fff,rgba(255,255,255,0))}
+    .partner-carousel:after{right:0;background:linear-gradient(to left,#fff,rgba(255,255,255,0))}
+    .partner-track{display:flex;align-items:center;gap:20px;width:max-content;animation:partnerScroll 15s linear infinite}
+    .partner-track:hover{animation-play-state:paused}
+    .partner-track .partner{width:190px;flex:0 0 190px}
+    .partner a{display:flex;align-items:center;justify-content:center;width:100%;height:100%}
+    @keyframes partnerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    footer{padding:20px 0 40px;color:#777}
+    @media (max-width: 1024px){
+      nav ul{display:none}
+      .hero-card{grid-template-columns:1fr}
+      .hero-copy{order:2;background:#fff}
+      .hero-media{min-height:360px}
+      .hero-media:before{background:linear-gradient(180deg,rgba(255,255,255,0) 56%,rgba(255,255,255,.72) 100%)}
+      h1{font-size:48px}
+      .feature-row,.grid-4,.grid-3{grid-template-columns:repeat(2,1fr)}
+      .join{grid-template-columns:1fr}
+      .countdown{justify-content:flex-start}
+    }
+    @media (max-width: 640px){
+      .feature-row,.grid-4,.grid-3{grid-template-columns:1fr}
+      h1{font-size:40px}
+      .hero-copy{padding:26px 22px}
+      .brand img{width:82px}
+      .brand-title{font-size:16px}
+      .cta{padding:12px 18px}
+      .solidarity-visual{min-height:200px}
+      .time-box{min-width:58px}
+
+      .hero-project-card{left:14px;right:14px;bottom:14px;padding:13px 14px;gap:10px;align-items:flex-start}
+      .hero-project-card img{width:38px;height:38px;flex-basis:38px}
+      .hero-project-card strong{font-size:14px}
+      .hero-project-card p{font-size:12px}
+      .hero-project-card a{display:none}
+    <!-- <!-- } --> -->
+	
+	
+  
+/* Tarifs cliquables dans les cartes courses/marches */
+.price-link{
+  display:inline-flex;
+  flex-direction:column;
+  align-items:flex-start;
+  width:max-content;
+  max-width:100%;
+  margin-top:12px;
+  padding:12px 16px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#e91e79,#ff4d9b);
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 14px 30px rgba(233,30,121,.24);
+  transition:transform .22s ease, box-shadow .22s ease, opacity .22s ease;
+}
+
+.price-link:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px rgba(233,30,121,.32);
+  opacity:.96;
+}
+
+.price-link strong{
+  font-size:20px;
+  line-height:1;
+  font-weight:900;
+}
+
+.price-link span{
+  margin-top:4px;
+  font-size:12px;
+  font-weight:800;
+  opacity:.96;
+}
+
+.price-note{
+  margin-top:7px;
+  font-size:12px;
+  font-weight:700;
+  color:#e91e79;
+}
+
+
+/* Cartouche joëlette compacte à droite */
+.hero-media{position:relative;}
+.hero-project-card{
+position:absolute!important;
+right:20px;
+top:50%;
+transform:translateY(-50%);
+width:220px;
+min-height:220px;
+padding:18px!important;
+border-radius:28px!important;
+display:flex!important;
+flex-direction:column;
+justify-content:space-between;
+align-items:center;
+text-align:center;
+background:rgba(255,255,255,.96);
+box-shadow:0 20px 45px rgba(233,30,121,.18);
+}
+.hero-project-card img{
+width:60px!important;
+height:auto;
+margin-bottom:-10px;
+}
+.hero-project-card strong{
+font-size:20px;
+line-height:1.2;
+}
+.hero-project-card p{
+font-size:14px;
+margin:10px 0;
+}
+.hero-project-card a{
+display:inline-block;
+padding:10px 18px;
+border-radius:999px;
+background:#e91e79;
+color:#fff;
+text-decoration:none;
+font-weight:800;
+}
+@media(max-width:900px){
+.hero-project-card{
+position:relative!important;
+top:auto;right:auto;transform:none;
+width:100%;min-height:auto;margin-top:15px;
+}
+}
+
+.hero-project-card{
+right:16px!important;
+bottom:16px!important;
+top:auto!important;
+transform:none!important;
+width:170px!important;
+min-height:170px!important;
+padding:14px!important;
+border-radius:22px!important;
+}
+.hero-project-card img{width:45px!important;}
+.hero-project-card strong{font-size:16px!important;}
+.hero-project-card p{font-size:12px!important;line-height:1.35;}
+.hero-project-card a{padding:8px 14px;font-size:12px;}
+
+/* Cartouche : moitié moins haute + 50% plus large sans déplacer */
+.hero-project-card{
+width:345px!important;
+max-width:345px!important;
+min-height:46px!important;
+padding:10px 14px!important;
+}
+.hero-project-card img{width:34px!important;height:34px!important;}
+.hero-project-card strong{font-size:15px!important;}
+.hero-project-card p{font-size:15px!important;}
+
+/* Ajustement : -40% hauteur supplémentaire + bouton centré */
+.hero-project-card{
+    min-height:28px !important;   /* ~40% de moins que 46px */
+    padding:8px 14px !important;
+    align-items:center !important;
+}
+
+.hero-project-card a{
+    display:block !important;
+    margin:6px auto 0 auto !important;
+    text-align:center !important;
+    width:max-content !important;
+}
+
+.hero-project-card img{
+    width:30px !important;
+    height:30px !important;
+}
+
+.hero-project-card p{
+    margin-bottom:2px !important;
+}
+
+
+/* -30% supplémentaire sur la hauteur */
+.hero-project-card{
+    min-height:20px !important;
+    padding:6px 14px !important;
+}
+.hero-project-card img{
+    width:45px !important;
+    height:45px !important;
+}
+.hero-project-card p{
+    margin:1px 0 !important;
+}
+.hero-project-card a{
+    margin-top:-10px !important;
+}
+
+
+/* Joëlette visible à l'ouverture du site */
+.hero-media{position:relative!important;overflow:!important;}
+.hero-joelette{
+ position:absolute;
+ right:260px; /* à côté de la cartouche */
+ bottom:0;
+ width:180px;
+ z-index:5;
+ filter:drop-shadow(0 10px 20px rgba(233,30,121,.25));
+ opacity:.95;
+}
+.hero-joelette img{
+ width:100%;
+ height:auto;
+}
+@media(max-width:900px){
+ .hero-joelette{width:110px;right:150px;bottom:-10px;}
+}
+
+
+/* Ajuste le texte pour longer la joëlette */
+.hero-project-card p{
+  padding-left:0px !important;
+  line-height:1.35 !important;
+}
+
+
+/* Décale le bouton Découvrir vers la droite */
+.hero-project-card a{
+    margin-left:65px !important;
+    margin-right:0 !important;
+}
+
+
+/* Encart courses enfants */
+.kids-races-card{
+  margin:24px 0;
+  padding:24px;
+  border-radius:26px;
+  border:1px solid rgba(233,30,121,.18);
+  background:linear-gradient(135deg,#fff 0%,#fff4f8 100%);
+  box-shadow:0 16px 38px rgba(233,30,121,.12);
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:18px;
+  align-items:center;
+}
+.kids-races-card .kids-icon{
+  width:58px;
+  height:58px;
+  border-radius:18px;
+  background:#e91e79;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:30px;
+  box-shadow:0 12px 28px rgba(233,30,121,.24);
+}
+.kids-races-card h2{
+  margin:0 0 8px;
+  color:#e91e79;
+  font-size:24px;
+  line-height:1.15;
+}
+.kids-races-card p{
+  margin:0;
+  color:#555;
+  line-height:1.55;
+}
+.kids-races-card .kids-price{
+  padding:12px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#e91e79,#ff4d9b);
+  color:#fff;
+  font-weight:900;
+  white-space:nowrap;
+}
+@media(max-width:800px){
+  .kids-races-card{
+    grid-template-columns:1fr;
+    text-align:center;
+    justify-items:center;
+  }
+}
+
+
+/* Cartouche joëlette compacte à droite */
+.hero-media{position:relative;}
+.hero-project-card{
+position:absolute!important;
+right:20px;
+top:50%;
+transform:translateY(-50%);
+width:220px;
+min-height:220px;
+padding:18px!important;
+border-radius:28px!important;
+display:flex!important;
+flex-direction:column;
+justify-content:space-between;
+align-items:center;
+text-align:center;
+background:rgba(255,255,255,.96);
+box-shadow:0 20px 45px rgba(233,30,121,.18);
+}
+.hero-project-card img{
+width:60px!important;
+height:auto;
+margin-bottom:-10px;
+}
+.hero-project-card strong{
+font-size:20px;
+line-height:1.2;
+}
+.hero-project-card p{
+font-size:14px;
+margin:10px 0;
+}
+.hero-project-card a{
+display:inline-block;
+padding:10px 18px;
+border-radius:999px;
+background:#e91e79;
+color:#fff;
+text-decoration:none;
+font-weight:800;
+}
+@media(max-width:900px){
+.hero-project-card{
+position:relative!important;
+top:auto;right:auto;transform:none;
+width:100%;min-height:auto;margin-top:15px;
+}
+}
+
+.hero-project-card{
+right:16px!important;
+bottom:16px!important;
+top:auto!important;
+transform:none!important;
+width:170px!important;
+min-height:170px!important;
+padding:14px!important;
+border-radius:22px!important;
+}
+.hero-project-card img{width:45px!important;}
+.hero-project-card strong{font-size:16px!important;}
+.hero-project-card p{font-size:12px!important;line-height:1.35;}
+.hero-project-card a{padding:8px 14px;font-size:12px;}
+
+/* Cartouche : moitié moins haute + 50% plus large sans déplacer */
+.hero-project-card{
+width:345px!important;
+max-width:345px!important;
+min-height:46px!important;
+padding:10px 14px!important;
+}
+.hero-project-card img{width:34px!important;height:34px!important;}
+.hero-project-card strong{font-size:17px!important;}
+.hero-project-card p{font-size:15px!important;}
+
+/* Ajustement : -40% hauteur supplémentaire + bouton centré */
+.hero-project-card{
+    min-height:28px !important;   /* ~40% de moins que 46px */
+    padding:8px 14px !important;
+    align-items:center !important;
+}
+
+.hero-project-card a{
+    display:block !important;
+    margin:6px auto 0 auto !important;
+    text-align:center !important;
+    width:max-content !important;
+}
+
+.hero-project-card img{
+    width:30px !important;
+    height:30px !important;
+}
+
+.hero-project-card p{
+    margin-bottom:2px !important;
+}
+
+
+/* -30% supplémentaire sur la hauteur */
+.hero-project-card{
+    min-height:20px !important;
+    padding:6px 14px !important;
+}
+.hero-project-card img{
+    width:50px !important;
+    height:50px !important;
+}
+.hero-project-card p{
+    margin:1px 0 !important;
+}
+.hero-project-card a{
+    margin-top:-10px !important;
+}
+/* Joëlette visible à l'ouverture du site */
+.hero-media{position:relative!important;overflow:!important;}
+.hero-joelette{
+ position:absolute;
+ right:290px;
+ bottom:0;
+ width:210px;
+ z-index:5;
+ filter:drop-shadow(0 10px 20px rgba(233,30,121,.25));
+ opacity:.95;
+}
+.hero-joelette img{
+ width:100%;
+ height:auto;
+}
+@media(max-width:900px){
+ .hero-joelette{width:110px;right:150px;bottom:-10px;}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+	<a class="brand" href="index.html" aria-label="Retour à l'accueil Les Boucles de la Juine">
+        <img src="assets/logo.png" alt="Logo Les Boucles de la Juine">
+      </a>
+</div>
+    <nav>
+      <ul>
+        <li><a href="#courses">Les courses</a></li>
+        <li><a href="#marches">Marches</a></li>
+        <li><a href="joelette.html">Projet solidaire</a></li>
+        <li><a href="benevoles.html">Bénévoles</a></li>
+        <li><a href="#partenaires">Partenaires</a></li>
+        <li><a href="reglement.html">Règlement</a></li>
+		<li><a href="histoire.html">Histoire</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="https://protiming.fr/Runnings/detail/8457">Je m'inscris</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-card">
+      <div class="hero-copy">
+        <div class="eyebrow">Courses & marches solidaires</div>
+        <h1>Les Boucles<br>de la Juine</h1>
+        <div class="meta">
+          <div><img class="meta-icon" src="assets/Ico lieux.png" alt="Lieu"> <a href="https://maps.app.goo.gl/jQiK2ax5Fj4THZNG8" target="_blank" style="color:inherit;text-decoration:none;">Saclas (91) · Sud Essonne</a></div>
+          <div><img class="meta-icon" src="assets/Ico date.png" alt="Date"> 27 septembre 2026</div>
+          <div><img class="meta-icon" src="assets/Ico courses.png" alt="Courses"> 3 courses · <img class="meta-icon" src="assets/Ico marches.png" alt="Marches"> 2 marches</div>
+        </div>
+        <p><strong>
+<span style="color:#555;">Les Boucles</span>
+<span style="color:#e91e79;"> de la Juine</span>
+</strong>,
+c’est une journée de sport, de partage et de convivialité au cœur du sud Essonne.<br>
+Entre villages typiques, routes de campagne et ambiance chaleureuse, chaque parcours est accessible à tous.<br>
+En participant, vous soutenez également un projet solidaire fort : l’acquisition d’une joëlette pour rendre l’événement accessible au plus grand nombre.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#inscription">Je m'inscris</a>
+          <a class="btn secondary" href="#courses">En savoir plus</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <img src="assets/hero.jpg" alt="Départ de la course">
+        <div class="hero-joelette"><img src="assets/joelette-page.png" alt="Joëlette"></div>
+<div class="hero-project-card" aria-label="Projet solidaire joëlette">
+          <img src="assets/Ico projet solidaire.png" alt="Projet solidaire">
+          <div>
+            <strong>Ouvrir le chemin à chacun </strong>
+            <p>Inscriptions et partenaires nous aident à financer cet équipement inclusif.</p>
+          </div>
+          <a href="joelette.html">Découvrir</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="kids-races-card" id="courses-enfants">
+  <div class="kids-icon" aria-hidden="true">★</div>
+  <div>
+    <h2>Courses enfants — À 14h samedi 26 septembre 2026</h2>
+    <p>
+      Deux courses enfants sont organisées autour du plan d’eau de Saclas :
+      <strong>1,5 km</strong> et <strong>3 km</strong>, au tarif unique de <strong>2€</strong>.
+    </p>
+	</p>
+	(Les inscriptions se feront directement sur place le jour même, L’intégralité des inscriptions contribuera au financement de la joëlette)
+	</p>
+  </div>
+  <div class="kids-price">2€</div>
+</section>
+
+
+
+
+  <section id="courses" class="section grid-4">
+    <article class="card">
+      <div class="img-wrap">
+        <span class="tag">6 km</span>
+        <img class="cover" src="assets/6km.jpg" alt="6 km">
+      </div>
+      <div class="course-meta">
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico depart.png" alt="Départ"> Départ 9h30</div>
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico denivele.png" alt="Dénivelé"> Dénivelé + 50 m</div>
+      </div>
+      <div class="card-body">
+        <h3>La découverte</h3>
+        <p>Pour les coureurs du dimanche, les débutants ou ceux qui veulent profiter sans se mettre dans le rouge. Un parcours accessible pour découvrir l’ambiance des Boucles de la Juine.</p>
+        <p style="margin-top:10px;font-weight:700;color:#c91869"><a href="https://www.openrunner.com/route-details/21806119" target="_blank" rel="noopener">Réf. GPX : #21806119</a></p>
+      
+        <a class="price-link" href="https://protiming.fr/Runnings/register/8457-Les-Boucles-de-la-Juine/24856-6km" aria-label="Inscriptions bientôt ouvertes">
+          <strong>10€*</strong>
+          <span>Inscriptions bientôt ouvertes</span>
+        </a>
+        <div class="price-note">*+2€ pour toute inscription sur place le jour de l’événement</div>
+</div>
+    </article>
+
+    <article class="card">
+      <div class="img-wrap">
+        <span class="tag">9 km</span>
+        <img class="cover" src="assets/9km.jpg" alt="9 km">
+      </div>
+      <div class="course-meta">
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico depart.png" alt="Départ"> Départ 9h15</div>
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico denivele.png" alt="Dénivelé"> Dénivelé + 86 m</div>
+      </div>
+      <div class="card-body">
+        <h3>Le challenge</h3>
+        <p>Le juste équilibre entre plaisir et défi. Un parcours rythmé pour celles et ceux qui veulent se tester tout en profitant des paysages de la vallée de la Juine.</p>
+        <p style="margin-top:10px;font-weight:700;color:#c91869"><a href="https://www.openrunner.com/route-details/21806152" target="_blank" rel="noopener">Réf. GPX : #21806152</a></p>
+      
+        <a class="price-link" href="https://protiming.fr/Runnings/register/8457-Les-Boucles-de-la-Juine/24858-9km" aria-label="Inscriptions bientôt ouvertes">
+          <strong>12€*</strong>
+          <span>Inscriptions bientôt ouvertes</span>
+        </a>
+        <div class="price-note">*+2€ pour toute inscription sur place le jour de l’événement</div>
+</div>
+    </article>
+
+    <article class="card">
+      <div class="img-wrap">
+        <span class="tag">15 km</span>
+        <img class="cover" src="assets/15km.jpg" alt="15 km">
+      </div>
+      <div class="course-meta">
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico depart.png" alt="Départ"> Départ 9h00</div>
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico denivele.png" alt="Dénivelé"> Dénivelé + 151 m</div>
+      </div>
+      <div class="card-body">
+        <h3>La référence</h3>
+        <p>Le parcours des plus ambitieux, pour ceux qui aiment se dépasser. Une course exigeante pensée pour les amateurs de défi, au cœur des paysages de la vallée de la Juine.</p>
+        <p style="margin-top:10px;font-weight:700;color:#c91869"><a href="https://www.openrunner.com/route-details/21870390" target="_blank" rel="noopener">Réf. GPX : #21870390</a></p>
+      
+        <a class="price-link" href="https://protiming.fr/Runnings/register/8457-Les-Boucles-de-la-Juine/24857-15km" aria-label="Inscriptions bientôt ouvertes">
+          <strong>15€*</strong>
+          <span>Inscriptions bientôt ouvertes</span>
+        </a>
+        <div class="price-note">*+2€ pour toute inscription sur place le jour de l’événement</div>
+</div>
+    </article>
+
+    <article id="marches" class="card">
+      <div class="img-wrap">
+        <span class="tag">Marches</span>
+        <img class="cover" src="assets/marches.jpg" alt="Marches">
+      </div>
+      <div class="course-meta">
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico marches.png" alt="Marche"> Départ 08h45</div>
+        <div class="course-meta-line"><img class="inline-icon" src="assets/Ico lieux.png" alt="Lieu"> 6 km & 12 km via Guillerval</div>
+      </div>
+      <div class="card-body">
+        <h3>Les marches</h3>
+        <p>Prenez le temps d’apprécier les paysages, dans une ambiance conviviale et accessible à tous. Une autre façon de vivre les Boucles de la Juine.</p>
+        <p style="margin-top:5px;font-weight:700;color:#c91869"><a href="https://www.openrunner.com/route-details/22050780" target="_blank" rel="noopener">Réf. GPX : #22050780</a></p>
+        <p style="margin-top:-5px;font-weight:700;color:#c91869"><a href="https://www.openrunner.com/route-details/22051025" target="_blank" rel="noopener">Réf. GPX : #22051025</a></p>
+        <a class="price-link" href="https://protiming.fr/Runnings/detail/8457" aria-label="Inscriptions bientôt ouvertes">
+          <strong>10€ 6km*</strong>
+		   <strong>12€ 9km*</strong>
+          <span>Inscriptions bientôt ouvertes</span>
+        </a>
+        <div class="price-note">*+2€ pour toute inscription sur place le jour de l’événement</div>
+</div>
+    </article>
+  </section>
+
+  <section class="section grid-3">
+    <article id="benevoles" class="card">
+      <div class="img-wrap"><img class="cover" src="assets/benevoles.jpg" alt="Bénévoles"></div>
+      <div class="card-body">
+        <h3>Des bénévoles engagés</h3>
+        <p>Accueil, ravitaillement, dossards, remise des récompenses et signaleurs : les bénévoles sont essentiels, car sans eux la course n'existerait pas.</p>
+        <div class="card-action"><a class="small-btn" href="benevoles.html">Nous rejoindre</a></div>
+      </div>
+    </article>
+
+    <a href="joelette.html" class="solidarity-link">
+    <article id="solidarite" class="card wide-card wide-light solidarity-card">
+      <div class="eyebrow">Un projet solidaire</div>
+      <h3 style="font-size:28px;margin-top:10px">Inscriptions & sponsors financent une joëlette</h3>
+      <div class="solidarity-visual"><img src="assets/joelette-custom.png" alt="Joëlette rose"></div>
+      <p>Les bénéfices des inscriptions et le soutien des sponsors contribueront à l'achat d'une joëlette, dont le coût se situe entre 3 000 € et 4 000 €, afin de permettre à tous de partager l'aventure.</p>
+    </article>
+	</a>
+
+    <article class="card">
+      <div class="img-wrap"><img class="cover" src="assets/repas.jpg" alt="Repas d'après-course"></div>
+      <div class="card-body">
+        <h3>Repas d'après-course</h3>
+        <p><img class="inline-icon" src="assets/Ico repas.png" alt="Repas" style="display:inline-block;vertical-align:-4px;margin-right:6px">18 € par personne et 12€ 6/12ans. Un moment convivial pour clôturer la journée autour d'un repas.</p>
+        <p>Les coureurs peuvent s'inscrire directement lors de leur inscription à la course. Les non-coureurs peuvent également réserver via le lien cliquable ci-dessous.</p>
+        <div class="card-action"><a class="small-btn" href="https://protiming.fr/Runnings/register/8457-Les-Boucles-de-la-Juine/24863-Achat-repas-evenement-uniquement">Réserver</a></div>
+      </div>
+    </article>
+  </section>
+
+  <section id="inscription" class="join">
+    <div class="join-copy">
+      <strong>Prêt à relever le défi ?</strong>
+      <p>Rejoignez-nous à Saclas le 27 septembre 2026 pour une journée de sport, de partage et de solidarité.</p>
+      <p class="join-note">Les inscriptions seront rouvertes 3 mois avant la course.</p>
+    </div>
+    </div>
+    <a class="cta" href="https://protiming.fr/Runnings/detail/8457" aria-disabled="false">Je m'inscris dès maintenant</a>
+  </section>
+
+  <section id="partenaires" class="partners">
+    <h2>Nos partenaires</h2>
+    <div class="partner-carousel" aria-label="Carrousel des partenaires">
+      <div class="partner-track">
+        <div class="partner"><a href="https://urlr.me/EdFmnS" target="_blank" rel="noopener"><img src="assets/ca_idf.png" alt="Crédit Agricole Île-de-France"></a></div>
+        <div class="partner"><a href="https://www.bouchonsdamour.com/" target="_blank" rel="noopener"><img src="assets/bouchons.jpg" alt="Les Bouchons d'Amour"></a></div>
+        <div class="partner"><a href="https://www.mairie-saclas.fr/" target="_blank" rel="noopener"><img src="assets/mairie_saclas.png" alt="Mairie de Saclas"></a></div>
+        <div class="partner"><a href="https://lemerevillois.fr/" target="_blank" rel="noopener"><img src="assets/mereville.png" alt="Méréville"></a></div>
+        <div class="partner"><a href="https://www.mairiepussay.fr/" target="_blank" rel="noopener"><img src="assets/pussay.png" alt="Pussay"></a></div>
+		<div class="partner"><a href="https://www.guillerval.fr/" target="_blank" rel="noopener"><img src="assets/Guillerval.png" alt="Guillerval"></a></div>
+        <div class="partner"><a href="https://www.ufolep.org/?" target="_blank" rel="noopener"><img src="assets/Ufolep.png" alt="UFOLEP"></a></div>
+        <div class="partner"><a href="https://www.handisport.org/" target="_blank" rel="noopener"><img src="assets/Handisport.png" alt="Handisport"></a></div>
+		<div class="partner"><a href="https://sdis91.fr/" target="_blank" rel="noopener"><img src="assets/SDIS91.png" alt="SDIS91"></a></div>
+		<div class="partner"><a href="https://www.essonne.fr/" target="_blank" rel="noopener"><img src="assets/Dep.essonne.png" alt="Essonne"></a></div>
+		<div class="partner"><a href="https://www.caese.fr/" target="_blank" rel="noopener"><img src="assets/Caese.png" alt="caese"></a></div>
+      	<div class="partner"><a href="https://urlr.me/EdFmnS" target="_blank" rel="noopener"><img src="assets/ca_idf.png" alt="Crédit Agricole Île-de-France"></a></div>
+        <div class="partner"><a href="https://www.bouchonsdamour.com/" target="_blank" rel="noopener"><img src="assets/bouchons.jpg" alt="Les Bouchons d'Amour"></a></div>
+        <div class="partner"><a href="https://www.mairie-saclas.fr/" target="_blank" rel="noopener"><img src="assets/mairie_saclas.png" alt="Mairie de Saclas"></a></div>
+        <div class="partner"><a href="https://lemerevillois.fr/" target="_blank" rel="noopener"><img src="assets/mereville.png" alt="Méréville"></a></div>
+        <div class="partner"><a href="https://www.mairiepussay.fr/" target="_blank" rel="noopener"><img src="assets/pussay.png" alt="Pussay"></a></div>
+		<div class="partner"><a href="https://www.guillerval.fr/" target="_blank" rel="noopener"><img src="assets/Guillerval.png" alt="Guillerval"></a></div>
+        <div class="partner"><a href="https://www.ufolep.org/?" target="_blank" rel="noopener"><img src="assets/Ufolep.png" alt="UFOLEP"></a></div>
+        <div class="partner"><a href="https://www.handisport.org/" target="_blank" rel="noopener"><img src="assets/Handisport.png" alt="Handisport"></a></div>
+        <div class="partner"><a href="https://urlr.me/EdFmnS" target="_blank" rel="noopener"><img src="assets/ca_idf.png" alt="Crédit Agricole Île-de-France"></a></div>
+		<div class="partner"><a href="https://sdis91.fr/" target="_blank" rel="noopener"><img src="assets/SDIS91.png" alt="SDIS91"></a></div>
+		<div class="partner"><a href="https://www.essonne.fr/" target="_blank" rel="noopener"><img src="assets/Dep.essonne.png" alt="Essonne"></a></div>
+		<div class="partner"><a href="https://www.caese.fr/" target="_blank" rel="noopener"><img src="assets/Caese.png" alt="caese"></a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  ©2026 OMS/Organisation de Manifestations Sportives · Les Boucles de la Juine · Saclas · Sud Essonne
+</footer>
+
+<script>
+  (function () {
+    const openingDate = new Date('2026-06-27T09:00:00');
+    const daysEl = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minutesEl = document.getElementById('cd-minutes');
+    const secondsEl = document.getElementById('cd-seconds');
+    function updateCountdown() {
+      const now = new Date();
+      const diff = openingDate - now;
+      if (diff <= 0) {
+        daysEl.textContent = '00';
+        hoursEl.textContent = '00';
+        minutesEl.textContent = '00';
+        secondsEl.textContent = '00';
+        return;
+      }
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      daysEl.textContent = String(days).padStart(2, '0');
+      hoursEl.textContent = String(hours).padStart(2, '0');
+      minutesEl.textContent = String(minutes).padStart(2, '0');
+      secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  })();
+</script>
+</body>
+</html>

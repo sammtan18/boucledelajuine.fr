@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projet Joëlette — Les Boucles de la Juine</title>
+  <style>
+    :root{
+      --pink:#e91e79;
+      --pink-dark:#c91869;
+      --pink-soft:#fff0f7;
+      --text:#2b2b2b;
+      --muted:#666;
+      --line:#f3cade;
+      --shadow:0 18px 48px rgba(233,30,121,.12);
+      --shadow-soft:0 8px 24px rgba(233,30,121,.08);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--text);
+      background:radial-gradient(circle at top left, rgba(233,30,121,.10), transparent 34%),linear-gradient(180deg,#ffffff 0%, #fff7fb 100%);
+    }
+    img{max-width:100%;display:block}
+    a{text-decoration:none;color:inherit}
+    .wrap{max-width:1200px;margin:0 auto;padding:0 20px}
+    header{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-bottom:1px solid #f6dbe7}
+    .nav{display:flex;align-items:center;justify-content:center;padding:1px 0;gap:30px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;justify-content:center;gap:14px;flex-shrink:0}
+    .brand img{width:110px;height:auto;filter:drop-shadow(0 6px 12px rgba(233,30,121,.12))}
+    nav ul{display:flex;list-style:none;gap:26px;padding:0;margin:0;font-weight:700;color:#444;flex-wrap:wrap;justify-content:center}
+    nav a{position:relative}
+    nav a:after{content:"";position:absolute;left:0;bottom:-8px;width:0;height:2px;background:var(--pink);transition:.25s}
+    nav a:hover:after{width:100%}
+    .cta{background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;padding:14px 24px;border-radius:16px;font-weight:800;box-shadow:var(--shadow);transition:.2s ease}
+    .cta:hover{transform:translateY(-1px)}
+    .hero{padding:42px 0 24px}
+    .hero-card{display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:20px;overflow:hidden;border:1px solid var(--line);border-radius:34px;background:#fff;box-shadow:var(--shadow);padding:40px}
+    .eyebrow{color:var(--pink);font-weight:800;letter-spacing:.08em;font-size:13px;text-transform:uppercase}
+    h1{font-size:66px;line-height:.92;margin:16px 0 18px;font-weight:900;color:var(--pink)}
+    h2{font-size:32px;margin:0 0 16px;color:var(--pink)}
+    h3{font-size:20px;margin:0 0 10px;color:var(--pink);text-transform:uppercase}
+    p{color:var(--muted);line-height:1.65;margin:0 0 14px;font-size:17px}
+    .lead{font-size:21px;font-weight:800;color:#111;line-height:1.35;margin-bottom:18px}
+    .hero-visual{position:relative;min-height:420px;display:flex;align-items:center;justify-content:center}
+    .hero-visual:before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle, rgba(233,30,121,.18), rgba(233,30,121,0) 68%);z-index:0}
+    .hero-visual img{position:relative;z-index:1;width:min(640px,100%);filter:drop-shadow(0 30px 45px rgba(0,0,0,.16));-webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 86%, rgba(0,0,0,.55) 94%, rgba(0,0,0,0));mask-image:linear-gradient(to bottom, rgba(0,0,0,1) 86%, rgba(0,0,0,.55) 94%, rgba(0,0,0,0))}
+    .buttons{display:flex;gap:14px;flex-wrap:wrap;margin-top:24px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 24px;border-radius:16px;font-weight:800;border:2px solid var(--pink);transition:.2s ease}
+    .btn.primary{background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;box-shadow:var(--shadow-soft)}
+    .btn.secondary{background:#fff;color:var(--pink)}
+    .btn:hover{transform:translateY(-1px)}
+    .section{padding:24px 0}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+    .card{background:#fff;border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:var(--shadow-soft);height:100%}
+    .card ul{margin:12px 0 0;padding:0;list-style:none;color:var(--muted);line-height:1.55}
+    .card li{margin:10px 0;padding-left:28px;position:relative}
+    .card li:before{content:"✓";position:absolute;left:0;top:0;color:var(--pink);font-weight:900}
+    .highlight{margin:24px 0;background:linear-gradient(135deg,#fde7f1 0%,#fff7fb 100%);border:1px solid var(--line);border-radius:28px;padding:28px;box-shadow:var(--shadow-soft);display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start}
+    .highlight-icon{width:62px;height:62px;border-radius:20px;background:linear-gradient(135deg,var(--pink),#ff4d9b);color:#fff;display:flex;align-items:center;justify-content:center;font-size:32px;box-shadow:var(--shadow-soft)}
+    .footer-band{margin-top:26px;background:linear-gradient(135deg,var(--pink),#ff4d9b);border-radius:28px;padding:30px;color:#fff;display:flex;justify-content:space-between;gap:20px;align-items:center;box-shadow:var(--shadow)}
+    .footer-band strong{font-size:26px;display:block}.footer-band p{color:#fff;margin:6px 0 0}
+    footer{padding:22px 0 40px;color:#777;text-align:center}
+    @media(max-width:980px){nav ul{gap:16px}.hero-card{grid-template-columns:1fr;padding:28px}.hero-visual{min-height:300px;order:-1}h1{font-size:46px}.grid-3{grid-template-columns:1fr}.footer-band{flex-direction:column;text-align:center}.nav{gap:16px}.cta{padding:12px 18px}}
+    @media(max-width:640px){h1{font-size:38px}.hero-card{padding:22px;border-radius:24px}.brand img{width:92px}.hero-visual{min-height:230px}.highlight{grid-template-columns:1fr}.highlight-icon{width:54px;height:54px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><a href="index.html"><img src="assets/logo.png" alt="Les Boucles de la Juine"></a></div>
+   <nav>
+      <ul>
+        <li><a href="#courses">Les courses</a></li>
+        <li><a href="#marches">Marches</a></li>
+        <li><a href="joelette.html">Projet solidaire</a></li>
+        <li><a href="benevoles.html">Bénévoles</a></li>
+        <li><a href="#partenaires">Partenaires</a></li>
+        <li><a href="reglement.html">Règlement</a></li>
+		<li><a href="histoire.html">Histoire</a></li>
+      </ul>
+    </nav>
+    <a class="cta" href="#inscription">Je m'inscris</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="hero-card">
+      <div>
+        <div class="eyebrow">Projet solidaire 2026</div>
+        <h1>Projet<br>Joëlette</h1>
+        <p class="lead">Une course accessible à toutes et à tous.</p>
+        <p>Les Boucles de la Juine souhaitent rendre la course et les marches accessibles au plus grand nombre. Pour cette édition, notre projet solidaire est l’acquisition d’une joëlette.</p>
+        <p>La joëlette sera disponible au départ des courses et des marches pour celles et ceux qui en ont besoin, afin de permettre à chacun de vivre l’événement.</p>
+        <div class="buttons">
+          <a class="btn primary" href="#disponible">Comment en bénéficier ?</a>
+          <a class="btn secondary" href="index.html">Retour à l’accueil</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="assets/joelette-page.png" alt="Joëlette rose">
+      </div>
+    </div>
+  </section>
+
+  <section class="section grid-3">
+    <article class="card">
+      <h3>À quoi sert une joëlette ?</h3>
+      <p>La joëlette est un fauteuil tout-terrain mono-roue conçu pour accompagner une personne à mobilité réduite ou en situation de handicap sur des parcours sportifs ou de pleine nature.</p>
+      <ul>
+        <li>Participer à une course ou une marche</li>
+        <li>Partager un moment sportif et convivial</li>
+        <li>Découvrir la vallée de la Juine avec les autres participants</li>
+      </ul>
+    </article>
+
+    <article id="disponible" class="card">
+      <h3>Disponible au départ</h3>
+      <p>Le jour de l’événement, la joëlette sera mise à disposition au départ des courses et des marches pour les personnes qui en ont besoin.</p>
+      <p>Notre objectif est simple : permettre à chacun de participer aux Boucles de la Juine, sans exclusion.</p>
+      <ul>
+        <li>Accueil au départ des courses</li>
+        <li>Utilisation avec accompagnateurs bénévoles</li>
+        <li>Projet pensé pour l’inclusion et le partage</li>
+      </ul>
+    </article>
+
+    <article class="card">
+      <h3>Un projet collectif</h3>
+      <p>L’achat de cette joëlette est rendu possible grâce à la mobilisation de tous.</p>
+      <ul>
+        <li>Les inscriptions des participants</li>
+        <li>Le soutien de nos partenaires</li>
+        <li>L’engagement des bénévoles</li>
+      </ul>
+      <p style="font-weight:800;color:#c91869;margin-top:16px">Merci à toutes celles et ceux qui contribuent à faire avancer ce beau projet solidaire.</p>
+    </article>
+  </section>
+
+  <section class="highlight">
+    <div class="highlight-icon">♡</div>
+    <div>
+      <h2>Ensemble, allons plus loin</h2>
+      <p>Avec la joëlette, plus personne ne reste sur la ligne de côté. Les Boucles de la Juine veulent être un événement sportif, convivial et inclusif, ouvert à toutes les envies de participer.</p>
+      <p>Si vous souhaitez bénéficier de la joëlette ou accompagner ce projet, rapprochez-vous de l’équipe organisatrice le jour de la course.</p>
+    </div>
+  </section>
+
+  <section class="footer-band">
+    <div>
+      <strong>Le sport est fait pour être partagé.</strong>
+      <p>Merci pour votre soutien et votre engagement à nos côtés.</p>
+    </div>
+    <a class="btn secondary" href="index.html#solidarite">Voir le projet sur l’accueil</a>
+  </section>
+</main>
+
+<footer class="wrap">
+  OMS/Organisation de Manifestations Sportives · Les Boucles de la Juine · Saclas · Sud Essonne
+</footer>
+</body>
+</html>
